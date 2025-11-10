@@ -31,6 +31,9 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: true, error: null });
         try {
           const response = await authApi.login(data);
+          if (!response.data) {
+            throw new Error('登录失败：未返回数据');
+          }
           const { access_token, user } = response.data;
 
           // 保存 Token 到 Cookie (7天过期)

@@ -25,6 +25,9 @@ export const useQuoteStore = create<QuoteState>((set) => ({
     set({ isLoading: true, error: null });
     try {
       const response = await quoteApi.generate(data);
+      if (!response.data) {
+        throw new Error('生成失败：未返回数据');
+      }
       set({
         currentQuote: response.data,
         isLoading: false,
@@ -43,6 +46,9 @@ export const useQuoteStore = create<QuoteState>((set) => ({
     set({ isLoading: true, error: null });
     try {
       const response = await quoteApi.getHistory(page, 10);
+      if (!response.data) {
+        throw new Error('获取失败：未返回数据');
+      }
       set({
         history: response.data.quotes,
         isLoading: false,

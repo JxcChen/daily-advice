@@ -2,7 +2,7 @@ import React, { ButtonHTMLAttributes } from 'react';
 import clsx from 'clsx';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'danger';
+  variant?: 'primary' | 'secondary' | 'danger' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
   children: React.ReactNode;
@@ -23,6 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
     primary: 'bg-accent-primary hover:bg-accent-hover text-white border-transparent',
     secondary: 'bg-bg-tertiary hover:bg-border-default text-text-primary border-border-default',
     danger: 'bg-danger hover:bg-red-700 text-white border-transparent',
+    outline: 'bg-transparent hover:bg-bg-secondary text-text-primary border-border-default hover:border-accent-primary',
   };
 
   const sizeStyles = {
