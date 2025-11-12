@@ -2,14 +2,13 @@ export type EmotionType =
   | 'happy'
   | 'calm'
   | 'tired'
-  | 'nervous'
+  | 'anxious'
   | 'angry'
   | 'sad'
-  | 'excited'
+  | 'expectant'
   | 'default';
 
 export interface Quote {
-  quote_id: number;  // Backend returns quote_id, not id
   content: string;
   emotion: EmotionType;
   emotion_icon: string;

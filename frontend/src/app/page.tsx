@@ -5,20 +5,7 @@ import { QuoteDisplay } from '@/components/quote/QuoteDisplay';
 import { Button } from '@/components/ui';
 import { format } from 'date-fns';
 import { zhCN } from 'date-fns/locale';
-
-interface Quote {
-  content: string;
-  emotion: string;
-  emotion_icon: string;
-  emotion_color: string;
-  weather: {
-    city: string;
-    condition: string;
-    temperature: number;
-  };
-  is_birthday: boolean;
-  created_at: string;
-}
+import { Quote } from '@/types/quote';
 
 export default function HomePage() {
   const [name, setName] = useState('');

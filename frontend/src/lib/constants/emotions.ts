@@ -26,7 +26,7 @@ export const EMOTIONS: Record<EmotionType, EmotionConfig> = {
     keywords: ['疲惫', '累', '辛苦', '困倦', '乏力'],
     label: '疲惫',
   },
-  nervous: {
+  anxious: {
     icon: '😰',
     color: '#4169e1',
     keywords: ['焦虑', '担心', '紧张', '不安', '忧虑'],
@@ -44,7 +44,7 @@ export const EMOTIONS: Record<EmotionType, EmotionConfig> = {
     keywords: ['伤心', '难过', '失落', '悲伤', '沮丧'],
     label: '伤心',
   },
-  excited: {
+  expectant: {
     icon: '🤩',
     color: '#ff8c00',
     keywords: ['期待', '兴奋', '激动', '雀跃', '憧憬'],
