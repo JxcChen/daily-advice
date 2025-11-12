@@ -1,167 +1,114 @@
 # 每日励志语录系统
 
-> 基于AI的个性化每日励志语录生成系统，结合用户信息、日期、天气等多维度因素，提供独特的中国风暗黑美学体验。
+> 基于AI的个性化每日励志语录生成系统，结合天气、日期、心情等多维度因素，提供独特的中国风暗黑美学体验。
 
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/)
-[![Flask](https://img.shields.io/badge/Flask-3.0-green.svg)](https://flask.palletsprojects.com/)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black.svg)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue.svg)](https://www.typescriptlang.org/)
 [![DeepSeek](https://img.shields.io/badge/AI-DeepSeek-purple.svg)](https://www.deepseek.com/)
+[![Vercel](https://img.shields.io/badge/Deploy-Vercel-black.svg)](https://vercel.com/)
 
 ---
 
 ## 📖 项目简介
 
-每日励志语录系统是一个结合了人工智能技术的个性化内容生成平台。系统通过分析用户的个人信息（姓名、年龄、性别、生日）、实时环境（天气、日期、时间）以及用户当前状态（心情、今日大事），使用DeepSeek AI生成贴合用户情境的励志语录。
+每日励志语录系统是一个基于 Next.js 14 和 DeepSeek AI 的纯前端应用。用户无需注册登录，只需填写名称、心情等信息，即可生成个性化的励志语录。系统采用 Vercel Serverless Functions，部署简单，完全免费。
 
 ### ✨ 核心特性
 
 - 🤖 **AI智能生成**：基于DeepSeek大模型，生成富有诗意和情感智慧的励志语录
-- 🎂 **生日识别**：自动识别用户生日并生成特殊祝福语录
+- 🚀 **无需登录**：去除繁琐的注册流程，直接使用
 - 🌤️ **天气集成**：结合和风天气API，根据实时天气调整语录风格
 - 😊 **情绪识别**：支持8种情绪类型，匹配对应的表情和配色
 - 🎨 **中国风美学**：暗黑主题配合水墨风格，画卷展开动画
 - 📱 **响应式设计**：支持桌面、平板、移动端多种设备
+- ⚡ **极速部署**：一键部署到 Vercel，完全免费
 
 ---
 
 ## 🏗️ 技术架构
 
-### 后端技术栈
+### 技术栈
 
 | 技术 | 版本 | 用途 |
 |------|------|------|
-| Python | 3.10+ | 编程语言 |
-| Flask | 3.0.0 | Web框架 |
-| SQLAlchemy | 2.0+ | ORM框架 |
-| Flask-JWT-Extended | 4.6.0 | JWT认证 |
-| bcrypt | 4.1.2 | 密码加密 |
-| DeepSeek API | - | AI语录生成 |
-| 和风天气API | - | 天气数据 |
-
-### 前端技术栈（计划）
-
-| 技术 | 版本 | 用途 |
-|------|------|------|
-| Next.js | 14.x | React框架 |
+| Next.js | 14.x | React框架（App Router） |
 | TypeScript | 5.x | 类型系统 |
 | TailwindCSS | 3.x | CSS框架 |
 | Framer Motion | 11.x | 动画库 |
-| Zustand | 4.x | 状态管理 |
+| DeepSeek API | - | AI语录生成 |
+| 和风天气API | - | 天气数据 |
+| Vercel | - | 部署平台 |
+
+### 架构特点
+
+- **Serverless Functions**：使用 Vercel Edge Functions 处理 API 请求
+- **无后端依赖**：不需要独立的后端服务器
+- **零数据库**：不存储用户数据，保护隐私
+- **全球CDN**：Vercel 自动提供全球加速
 
 ---
 
 ## 🚀 快速开始
 
-### 环境要求
+### 部署到 Vercel（推荐）
 
-- Python 3.10+
-- Node.js 18+（前端）
-- SQLite（开发）/ PostgreSQL（生产）
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/daily-advice)
 
-### 后端安装
+1. 点击上方按钮，跳转到 Vercel
+2. 连接 GitHub 账号并导入仓库
+3. 配置环境变量：
+   - `DEEPSEEK_API_KEY`：DeepSeek API 密钥（**必需**）
+   - `QWEATHER_API_KEY`：和风天气 API 密钥（可选）
+4. 点击 Deploy，等待部署完成
+
+详细部署说明请查看 [VERCEL_DEPLOY.md](VERCEL_DEPLOY.md)
+
+### 本地开发
 
 ```bash
 # 克隆项目
-cd /Users/chnjx/ai-project/daily-advice
+git clone https://github.com/yourusername/daily-advice.git
+cd daily-advice
 
-# 进入后端目录
-cd backend
-
-# 创建虚拟环境
-python3 -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# 安装依赖
-pip install -r requirements.txt
-
-# 配置环境变量
-cp .env.example .env
-# 编辑 .env 文件，填入API密钥
-
-# 初始化数据库
-flask db upgrade
-
-# 启动服务器
-python run.py
-```
-
-服务器将在 `http://localhost:5001` 启动
-
-### 前端安装（待开发）
-
-```bash
 # 进入前端目录
 cd frontend
 
 # 安装依赖
 npm install
 
+# 创建环境变量文件
+cp ../.env.example .env.local
+
+# 编辑 .env.local，填入 API 密钥
+# DEEPSEEK_API_KEY=sk-xxx
+# QWEATHER_API_KEY=your-key
+
 # 启动开发服务器
 npm run dev
+
+# 访问 http://localhost:3000
 ```
 
 ---
 
-## 📚 文档目录
+## 🔑 获取 API 密钥
 
-- [📄 产品需求文档（PRD）](docs/产品需求文档.md) - 完整的产品规格说明
-- [⚙️ 技术规范文档](docs/技术规范文档.md) - 技术架构和编码规范
-- [📅 开发计划](docs/开发计划.md) - 分阶段开发时间表
-- [🧪 后端测试文档](docs/后端测试文档.md) - API测试指南和常见问题
+### DeepSeek API（必需）
 
----
+1. 访问 [DeepSeek 官网](https://www.deepseek.com/)
+2. 注册账号并登录
+3. 进入 API 管理页面
+4. 创建 API Key
+5. 复制密钥（格式：`sk-xxx`）
 
-## 🔌 API接口
+### 和风天气 API（可选）
 
-### 认证接口
+1. 访问 [和风天气开发平台](https://dev.qweather.com/)
+2. 注册开发者账号
+3. 创建应用（选择"免费订阅"）
+4. 获取 API Key
 
-#### 用户注册
-```bash
-POST /api/v1/auth/register
-Content-Type: application/json
-
-{
-  "phone": "13800138000",
-  "password": "Test1234",
-  "name": "张三",
-  "gender": "male",
-  "birthday": "1995-06-15"
-}
-```
-
-#### 用户登录
-```bash
-POST /api/v1/auth/login
-Content-Type: application/json
-
-{
-  "phone": "13800138000",
-  "password": "Test1234"
-}
-```
-
-### 语录接口
-
-#### 生成每日语录
-```bash
-POST /api/v1/quote/generate
-Authorization: Bearer <token>
-Content-Type: application/json
-
-{
-  "event": "今天要面试一家大公司",
-  "mood": "有点紧张但充满期待",
-  "city": "北京"
-}
-```
-
-#### 获取历史语录
-```bash
-GET /api/v1/quote/history?page=1&per_page=10
-Authorization: Bearer <token>
-```
-
-更多API详情请查看 [后端测试文档](docs/后端测试文档.md)
+> **注意**：如果不配置和风天气 API，系统将使用默认天气信息（晴，20°C）
 
 ---
 
@@ -171,26 +118,17 @@ Authorization: Bearer <token>
 
 系统根据以下信息生成个性化语录：
 
-**用户信息**
-- 姓名、性别、年龄
+**用户输入**
+- 名称（必填）
+- 所在城市
+- 今日大事（可选）
+- 目前心情（可选）
 
-**时间信息**
-- 今日日期、星期几、当前时间
-- 是否生日或临近生日
+**自动获取**
+- 当前日期、星期、时间
+- 实时天气、气温
 
-**环境信息**
-- 所在城市、天气状况、气温
-
-**用户状态**（可选）
-- 今日大事、目前心情
-
-### 2. 生日识别系统
-
-- **当天生日**：生成包含生日祝福的特殊语录
-- **临近生日**（3天内）：生成带有期待感的语录
-- **普通日期**：正常励志语录
-
-### 3. 情绪表情系统
+### 2. 情绪识别系统
 
 支持8种情绪类型，每种情绪对应独特的表情图标和颜色：
 
@@ -218,18 +156,12 @@ Authorization: Bearer <token>
   - 青色 #00ced1
   - 红色 #dc143c
 
-### 字体规范
-
-- **标题**：方正清刻本悦宋 / 思源宋体
-- **正文**：站酷快乐体 / 汉仪尚巍手书
-- **英文**：Cinzel / EB Garamond
-
 ### 动画效果
 
-- 画卷展开动画（3秒）
-- 文字逐字显示（打字机效果）
+- 画卷展开动画（1.5秒）
+- 文字打字机效果
 - 情绪表情3D旋转入场
-- 发光效果
+- 悬浮发光效果
 
 ---
 
@@ -237,84 +169,25 @@ Authorization: Bearer <token>
 
 ### ✅ 已完成
 
-- [x] 产品需求文档
-- [x] 技术规范文档
-- [x] 数据库设计（User、QuoteHistory表）
-- [x] 用户认证系统（注册/登录/JWT）
-- [x] DeepSeek AI集成
-- [x] 天气服务集成
+- [x] Next.js 14 项目搭建
+- [x] Vercel Serverless Functions 集成
+- [x] DeepSeek AI 集成
+- [x] 和风天气服务集成
 - [x] 语录生成逻辑
-- [x] 生日识别功能
 - [x] 情绪识别系统
-- [x] API接口开发
-- [x] 后端测试文档
+- [x] 中国风 UI 实现
+- [x] 画卷展开动画
+- [x] 打字机效果
+- [x] 响应式设计
+- [x] Vercel 部署配置
 
-### 🔄 进行中
+### 🎯 特性
 
-- [ ] 修复JWT认证细节问题
-- [ ] 完善错误处理
-
-### ⏳ 待开始
-
-- [ ] 前端项目初始化
-- [ ] 认证页面开发
-- [ ] 语录生成主页面
-- [ ] 中国风UI实现
-- [ ] 动画效果开发
-- [ ] 前后端联调
-- [ ] 部署上线
-
----
-
-## 🔐 环境变量配置
-
-创建 `backend/.env` 文件：
-
-```bash
-# Flask配置
-FLASK_ENV=development
-SECRET_KEY=your-secret-key
-JWT_SECRET_KEY=your-jwt-secret-key
-
-# 数据库
-DATABASE_URL=sqlite:///dev.db
-
-# DeepSeek API
-DEEPSEEK_API_KEY=sk-b7f4afd268664e4582e33a60305fff34
-
-# 和风天气API（需要自己注册）
-QWEATHER_API_KEY=your-qweather-api-key
-
-# Redis（可选）
-REDIS_URL=redis://localhost:6379/0
-```
-
----
-
-## 🧪 测试
-
-### 后端测试
-
-```bash
-# 进入后端目录
-cd backend
-source venv/bin/activate
-
-# 运行测试（待完善）
-pytest tests/
-
-# 测试注册
-curl -X POST http://localhost:5001/api/v1/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"phone": "13800138000", "password": "Test1234", "name": "张三", "gender": "male", "birthday": "1995-06-15"}'
-
-# 测试登录
-curl -X POST http://localhost:5001/api/v1/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"phone": "13800138000", "password": "Test1234"}'
-```
-
-详细测试步骤请查看 [后端测试文档](docs/后端测试文档.md)
+- ✨ 无需登录注册
+- ✨ 零数据库设计
+- ✨ 完全免费部署
+- ✨ 全球 CDN 加速
+- ✨ HTTPS 安全保障
 
 ---
 
@@ -322,50 +195,71 @@ curl -X POST http://localhost:5001/api/v1/auth/login \
 
 ```
 daily-advice/
-├── backend/                  # 后端Flask项目
-│   ├── app/
-│   │   ├── __init__.py      # Flask应用工厂
-│   │   ├── models/          # 数据模型
-│   │   │   ├── user.py
-│   │   │   └── quote.py
-│   │   ├── api/             # API路由
-│   │   │   ├── auth.py
-│   │   │   ├── quote.py
-│   │   │   └── user.py
-│   │   ├── services/        # 业务逻辑
-│   │   │   ├── auth_service.py
-│   │   │   ├── ai_service.py
-│   │   │   ├── weather_service.py
-│   │   │   └── quote_service.py
-│   │   ├── utils/           # 工具函数
-│   │   │   ├── response.py
-│   │   │   ├── validator.py
-│   │   │   └── logger.py
-│   │   ├── config/          # 配置文件
-│   │   └── extensions.py    # Flask扩展
-│   ├── migrations/          # 数据库迁移
-│   ├── logs/                # 日志文件
-│   ├── requirements.txt     # Python依赖
-│   ├── .env                 # 环境变量
-│   └── run.py               # 启动文件
-│
-├── frontend/                 # 前端Next.js项目（待开发）
+├── frontend/                   # Next.js 前端项目
 │   ├── src/
-│   │   ├── app/             # Next.js 14 App Router
-│   │   ├── components/      # React组件
-│   │   ├── lib/             # 工具库
+│   │   ├── app/
+│   │   │   ├── api/           # Vercel Serverless Functions
+│   │   │   │   └── generate/
+│   │   │   │       └── route.ts  # 语录生成 API
+│   │   │   ├── page.tsx       # 主页面
+│   │   │   └── layout.tsx     # 根布局
+│   │   ├── components/        # React 组件
+│   │   │   ├── quote/        # 语录相关组件
+│   │   │   │   └── QuoteDisplay.tsx
+│   │   │   └── ui/           # 基础 UI 组件
+│   │   ├── lib/              # 工具库
+│   │   │   ├── constants/   # 常量定义
+│   │   │   └── utils/       # 工具函数
 │   │   ├── styles/          # 样式文件
-│   │   └── types/           # TypeScript类型
-│   └── public/              # 静态资源
-│
-├── docs/                     # 项目文档
-│   ├── 产品需求文档.md
-│   ├── 技术规范文档.md
-│   ├── 开发计划.md
-│   └── 后端测试文档.md
-│
-├── requirement.md            # 原始需求
-└── README.md                 # 项目说明
+│   │   │   └── globals.css
+│   │   └── types/           # TypeScript 类型
+│   ├── public/              # 静态资源
+│   ├── package.json
+│   └── next.config.js
+├── backend/                 # 旧版后端（已废弃）
+├── vercel.json             # Vercel 配置
+├── .env.example           # 环境变量示例
+├── VERCEL_DEPLOY.md       # 详细部署说明
+└── README.md
+
+```
+
+---
+
+## 🧪 本地测试
+
+```bash
+# 进入前端目录
+cd frontend
+
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
+
+# 浏览器访问 http://localhost:3000
+```
+
+**测试步骤**：
+1. 填写名称（必填）
+2. 选择城市
+3. 填写今日大事和心情（可选）
+4. 点击"生成今日语录"按钮
+5. 查看生成的语录和动画效果
+
+---
+
+## 🔐 环境变量配置
+
+创建 `frontend/.env.local` 文件：
+
+```bash
+# DeepSeek API（必需）
+DEEPSEEK_API_KEY=sk-xxx
+
+# 和风天气 API（可选）
+QWEATHER_API_KEY=your-key
 ```
 
 ---
