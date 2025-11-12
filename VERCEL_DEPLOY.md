@@ -2,38 +2,70 @@
 
 ## 🚀 快速部署到 Vercel
 
+### ⚠️ 重要：正确的部署配置
+
+**必须设置 Root Directory 为 `frontend`！**
+
 ### 方式一：通过 Vercel Dashboard（推荐）
 
-1. **推送代码到 GitHub**
-   ```bash
-   git add .
-   git commit -m "Prepare for Vercel deployment"
-   git push origin main
-   ```
+#### 步骤 1：推送代码到 GitHub ✅
+```bash
+git add .
+git commit -m "Prepare for Vercel deployment"
+git push origin main
+```
 
-2. **导入项目到 Vercel**
-   - 访问 [vercel.com](https://vercel.com)
-   - 点击 "Add New Project"
-   - 导入你的 GitHub 仓库
+#### 步骤 2：导入项目到 Vercel
+1. 访问 [vercel.com](https://vercel.com)
+2. 点击 **"Add New Project"**
+3. 从 GitHub 导入你的仓库
 
-3. **配置项目**
-   - Framework Preset: **Next.js** (自动检测)
-   - Root Directory: `frontend`
+#### 步骤 3：配置项目 ⭐ 关键步骤
+在 **"Configure Project"** 页面中：
+
+1. **Framework Preset**: Next.js（自动检测）
+
+2. **Root Directory**:
+   - 点击 **"Edit"** 按钮
+   - 输入 `frontend`
+   - ⚠️ **这是最重要的配置！**
+
+3. **Build and Output Settings**（自动配置，无需修改）:
    - Build Command: `npm run build`
    - Output Directory: `.next`
+   - Install Command: `npm install`
 
-4. **配置环境变量**
-   在 Vercel 项目设置中添加以下环境变量：
+#### 步骤 4：配置环境变量
+点击 **"Environment Variables"** 展开，添加：
 
-   | 变量名 | 值 | 说明 |
-   |--------|-----|------|
-   | `DEEPSEEK_API_KEY` | `sk-xxx` | DeepSeek API 密钥（**必需**） |
-   | `QWEATHER_API_KEY` | `your-key` | 和风天气 API 密钥（可选） |
+| Name | Value | Environment |
+|------|-------|-------------|
+| `DEEPSEEK_API_KEY` | `sk-b7f4afd268664e4582e33a60305fff34` | Production, Preview, Development |
+| `QWEATHER_API_KEY` | (可选留空) | Production, Preview, Development |
 
-5. **部署**
-   - 点击 "Deploy" 按钮
-   - 等待构建完成（约 2-3 分钟）
-   - 访问分配的 URL
+#### 步骤 5：部署
+1. 点击 **"Deploy"** 按钮
+2. 等待构建完成（约 2-3 分钟）
+3. 点击 **"Visit"** 访问你的网站
+
+---
+
+## 📸 Vercel 配置截图说明
+
+### 配置界面应该显示：
+```
+Framework Preset: Next.js
+Root Directory: frontend ✓
+Build Command: npm run build
+Output Directory: .next
+Install Command: npm install
+
+Environment Variables:
+✓ DEEPSEEK_API_KEY (Production, Preview, Development)
+✓ QWEATHER_API_KEY (Production, Preview, Development)
+```
+
+---
 
 ### 方式二：使用 Vercel CLI
 
@@ -44,13 +76,26 @@ npm install -g vercel
 # 登录 Vercel
 vercel login
 
-# 部署项目
+# 进入前端目录（重要！）
 cd frontend
+
+# 首次部署（会提示配置）
 vercel
 
-# 设置环境变量
+# 按提示回答：
+# Set up and deploy? Yes
+# Which scope? (选择你的账号)
+# Link to existing project? No
+# What's your project's name? daily-advice
+# In which directory is your code located? ./
+
+# 添加环境变量
 vercel env add DEEPSEEK_API_KEY
+# 输入: sk-b7f4afd268664e4582e33a60305fff34
+# 选择: Production, Preview, Development (全选)
+
 vercel env add QWEATHER_API_KEY
+# (可选，回车跳过)
 
 # 生产环境部署
 vercel --prod
